@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Portafolio de Johan Esteban</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #143d59;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .info, .upload-section {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #143d59;
+    }
+
+    .archivo {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #fefefe;
+      border-radius: 5px;
+    }
+
+    footer {
+      background-color: #143d59;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 40px;
+    }
+
+    img {
+      max-width: 200px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Portafolio Digital - Johan Esteban</h1>
+    <p>COBAT Plantel 08, Ixtacuizla | Grupo: 201 | Turno: Matutino</p>
+  </header>
+
+  <div class="container">
+    <div class="info">
+      <h2>Información del alumno</h2>
+      <p><strong>Nombre:</strong> Johan Esteban</p>
+      <p><strong>Materia:</strong> Cultura Digital</p>
+      <p><strong>Compañeros:</strong> Dayan Odet, Luis Manuel, Dulce Soledad</p>
+    </div>
+
+    <div class="upload-section">
+      <h2>Subir trabajo o imagen</h2>
+      <input type="file" id="archivoInput" multiple>
+      <div id="listaArchivos"></div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Johan Esteban – Portafolio Escolar
+  </footer>
+
+  <script>
+    const archivoInput = document.getElementById('archivoInput');
+    const listaArchivos = document.getElementById('listaArchivos');
+
+    archivoInput.addEventListener('change', function () {
+      listaArchivos.innerHTML = ''; // Limpiar vista previa
+      Array.from(this.files).forEach(file => {
+        const div = document.createElement('div');
+        div.className = 'archivo';
+        div.innerHTML = `<strong>${file.name}</strong>`;
+
+        // Si es imagen, mostrar vista previa
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            div.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        }
+
+        listaArchivos.appendChild(div);
+      });
+    });
+  </script>
+
+</body>
+</html>
